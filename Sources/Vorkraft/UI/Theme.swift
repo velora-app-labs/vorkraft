@@ -170,8 +170,12 @@ private struct PanelGlassSurface: View {
         // the outline AppKit already draws.
         if notchPresentation {
             Rectangle().fill(notchGlassSurface ? Color.clear : .black)
-        } else {
+        } else if #available(macOS 26.0, *) {
             surface.ignoresSafeArea()
+        } else {
+            // The native NSPopover material covers the body, border and arrow
+            // on macOS 14/15. A second inset SwiftUI fill produces a visible seam.
+            Color.clear
         }
     }
 

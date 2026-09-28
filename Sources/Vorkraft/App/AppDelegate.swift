@@ -429,7 +429,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate, NSW
         // content stays inset either way, before through the content view's frame
         // and now through the safe area the popover publishes, so only the surface
         // reaches the arrow.
-        popover.hasFullSizeContent = true
+        if #available(macOS 26.0, *) {
+            popover.hasFullSizeContent = true
+        } else {
+            // Sequoia/Sonoma inset the hosting surface even with full-size
+            // content enabled. Let AppKit paint one continuous body and arrow.
+            popover.hasFullSizeContent = false
+        }
         popover.delegate = self
         let host = NSHostingController(rootView: MenuPanelView())
         host.sizingOptions = .preferredContentSize
