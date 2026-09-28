@@ -1751,8 +1751,8 @@ enum SwitcherModelFeatureTests {
                "support prompt never leaks into another release series")
         suite.expect(AppInfo.discordURL.absoluteString == "https://github.com/velora-app-labs/Vorkraft/issues",
                "the community action opens Vorkraft issues")
-        suite.expect(AppInfo.coffeeURL == AppInfo.repositoryURL,
-               "the support action opens the Vorkraft repository")
+        suite.expect(AppInfo.coffeeURL.absoluteString == "https://buymeacoffee.com/vorssaint",
+               "the support action opens the original developer donation page")
         suite.expect(AppInfo.socialURL == AppInfo.repositoryURL,
                "the source action opens Vorkraft instead of an upstream social profile")
         // AppInfo.version falls back to "dev" in this bare harness, so read
