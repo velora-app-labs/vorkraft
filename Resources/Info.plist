@@ -79,7 +79,7 @@
 	<key>NSCameraUseContinuityCameraDeviceType</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2026 Vorssaint</string>
+	<string>Original code © 2026 Vorssaint. Modifications © 2026 Vorkraft contributors. Vorkraft is an independent fork, not an official Vorssaint release. GPL-3.0-or-later.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

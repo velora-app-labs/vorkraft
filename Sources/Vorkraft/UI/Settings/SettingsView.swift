@@ -740,6 +740,8 @@ struct AboutSettings: View {
             }
             .padding(.top, 4)
             Text(AppInfo.copyright)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }
@@ -986,7 +988,7 @@ struct SupportSettings: View {
                         .strokeBorder(Color(nsColor: .separatorColor).opacity(0.45))
                 )
 
-                Text("Original source copyright © 2026 Vorssaint. Licensed under GPL-3.0-or-later.")
+                Text(AppInfo.copyright)
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }

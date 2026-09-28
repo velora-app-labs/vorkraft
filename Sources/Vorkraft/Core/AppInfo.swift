@@ -9,7 +9,12 @@ enum AppInfo {
     static let automaticUpdatesAvailable = false
 
     static let name = "Vorkraft"
-    static let copyright = "© 2026 Vorssaint"
+    static let copyright = """
+    Vorkraft — an independent fork of Vorssaint
+    Original code © 2026 Vorssaint
+    Modifications © 2026 Vorkraft contributors
+    Licensed under GPL-3.0-or-later. Not an official Vorssaint release.
+    """
     static let websiteURL = URL(string: "https://github.com/velora-app-labs/Vorkraft")!
     static let repositoryURL = URL(string: "https://github.com/velora-app-labs/Vorkraft")!
     static let coffeeURL = URL(string: "https://buymeacoffee.com/vorssaint")!
