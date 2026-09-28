@@ -37,7 +37,7 @@ enum RecorderFeatureTests {
                 && !extraCloseNeedsDemotion && windowRetention.count == 0,
                "user-facing windows share one balanced app activation lifetime")
         let appDelegateSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/App/AppDelegate.swift",
+            contentsOfFile: "Sources/Vorkraft/App/AppDelegate.swift",
             encoding: .utf8)) ?? ""
         suite.expect(appDelegateSource.contains("if !settingsKeepsAppRegular {")
                 && appDelegateSource.contains("WindowActivationPolicy.retain()")
@@ -269,7 +269,7 @@ enum RecorderFeatureTests {
                "a recording being written right now has no file yet and is left alone")
 
         let directSaveRoot = FileManager.default.temporaryDirectory
-            .appendingPathComponent("vorssaint-recorder-save-\(UUID().uuidString)",
+            .appendingPathComponent("vorkraft-recorder-save-\(UUID().uuidString)",
                                     isDirectory: true)
         try? FileManager.default.createDirectory(at: directSaveRoot,
                                                  withIntermediateDirectories: true)
@@ -376,7 +376,7 @@ enum RecorderFeatureTests {
         // a file with the areas kept unreadable, and everything else drawn on
         // the picture, missing.
         let recorderComposerSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Recorder/RecorderComposer.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Recorder/RecorderComposer.swift",
             encoding: .utf8)) ?? ""
         suite.expect(!recorderComposerSource.isEmpty,
                "the recorder composer source reads back for its shape check")
@@ -384,7 +384,7 @@ enum RecorderFeatureTests {
                     ") async -> AVMutableVideoComposition?"),
                "a composition that cannot be built answers with nothing, never with the plain one")
         let recorderExporterSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Recorder/RecorderExporter.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Recorder/RecorderExporter.swift",
             encoding: .utf8)) ?? ""
         suite.expect(!recorderExporterSource.isEmpty,
                "the recorder exporter source reads back for its shape check")
@@ -810,7 +810,7 @@ enum RecorderFeatureTests {
         // lock: an unsynchronised one races the copy-on-write buffer. The
         // recording's origin and pause state belong to its shared clock.
         let typingSampler = ((try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Recorder/RecorderTypingTrack.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Recorder/RecorderTypingTrack.swift",
             encoding: .utf8)) ?? "")
             .components(separatedBy: .whitespacesAndNewlines)
             .filter { !$0.isEmpty }.joined(separator: " ")
@@ -825,7 +825,7 @@ enum RecorderFeatureTests {
         // Both samplers install and remove AppKit event monitors, so they are
         // started and stopped back on the main thread.
         let recorderSessionShape = ((try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Recorder/ScreenRecorderService.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Recorder/ScreenRecorderService.swift",
             encoding: .utf8)) ?? "")
             .components(separatedBy: .whitespacesAndNewlines)
             .filter { !$0.isEmpty }.joined(separator: " ")
@@ -1151,7 +1151,7 @@ enum RecorderFeatureTests {
                 && legacyBlur?.end == 4,
                "a blur saved before strength existed opens at the strength it was drawn with")
         let recorderControllerSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Recorder/RecorderEditorController.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Recorder/RecorderEditorController.swift",
             encoding: .utf8)) ?? ""
         suite.expect(recorderControllerSource.contains("rect: rect,\n                                      strength: item.strength)"),
                "redrawing a blur's area keeps its strength")
@@ -1358,7 +1358,7 @@ enum RecorderFeatureTests {
                 == ["Área", "Ímã", "Zebra"],
                "the localized compare is what puts them where a reader expects")
         let onboardingSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/Onboarding/OnboardingView.swift",
+            contentsOfFile: "Sources/Vorkraft/UI/Onboarding/OnboardingView.swift",
             encoding: .utf8)) ?? ""
         suite.expect(!onboardingSource.isEmpty, "the onboarding source reads back for its sorting check")
         let onboardingCode = onboardingSource.components(separatedBy: "\n")
@@ -1376,10 +1376,10 @@ enum RecorderFeatureTests {
         suite.expect(dottedI.folding(options: foldOptions, locale: Locale(identifier: "tr_TR"))
                 != dottedI.folding(options: foldOptions, locale: nil),
                "the dotted I is exactly where locale-aware folding diverges")
-        for path in ["Sources/Vorssaint/Services/Clipboard/ClipboardHistorySupport.swift",
-                     "Sources/Vorssaint/UI/Settings/SettingsSearchSupport.swift",
-                     "Sources/Vorssaint/Services/Switcher/SwitcherSupport.swift",
-                     "Sources/Vorssaint/Services/CommandBar/CommandBarSupport.swift"] {
+        for path in ["Sources/Vorkraft/Services/Clipboard/ClipboardHistorySupport.swift",
+                     "Sources/Vorkraft/UI/Settings/SettingsSearchSupport.swift",
+                     "Sources/Vorkraft/Services/Switcher/SwitcherSupport.swift",
+                     "Sources/Vorkraft/Services/CommandBar/CommandBarSupport.swift"] {
             let source = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
             suite.expect(!source.isEmpty, "\(path) reads back for its folding check")
             let code = source.components(separatedBy: "\n")
@@ -1398,7 +1398,7 @@ enum RecorderFeatureTests {
         // "battery" matched nothing outside English and the chip led to an
         // empty list, which teaches the opposite of what an example is for.
         let commandBarViewSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/CommandBar/CommandBarView.swift",
+            contentsOfFile: "Sources/Vorkraft/UI/CommandBar/CommandBarView.swift",
             encoding: .utf8)) ?? ""
         suite.expect(!commandBarViewSource.isEmpty, "the command bar view source reads back for its shape check")
         // Comments are stripped so prose naming the old literal cannot fail
@@ -1412,7 +1412,7 @@ enum RecorderFeatureTests {
         // A key glyph in front of a button label reads as that button's
         // shortcut, so neither command bar action button carries one.
         let commandBarSettingsSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/Settings/CommandBarSettings.swift",
+            contentsOfFile: "Sources/Vorkraft/UI/Settings/CommandBarSettings.swift",
             encoding: .utf8)) ?? ""
         suite.expect(!commandBarSettingsSource.contains("Label(text.openButton, systemImage:")
                 && !commandBarSettingsSource.contains("Label(text.resetPositionButton, systemImage:"),

@@ -14,7 +14,7 @@ let px = Int(widthPt * scale), py = Int(heightPt * scale)
 
 let out = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "dmg-background.png"
 let scriptDir = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
-let logoPath = scriptDir.deletingLastPathComponent().appendingPathComponent("Resources/Brand/logo.png").path
+let logoPath = scriptDir.deletingLastPathComponent().appendingPathComponent("build/BrandMark.png").path
 
 guard let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: px, pixelsHigh: py,
                                  bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
@@ -36,7 +36,7 @@ NSGradient(colors: [
 ])?.draw(in: full, angle: -90)
 
 // Title (origin is bottom-left, so high y = near the top).
-let title = "Vorssaint"
+let title = "Vorkraft"
 let titleAttrs: [NSAttributedString.Key: Any] = [
     .font: NSFont.systemFont(ofSize: 26, weight: .bold),
     .foregroundColor: NSColor(calibratedWhite: 0.12, alpha: 1),

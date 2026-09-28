@@ -135,7 +135,7 @@ enum ShelfFeatureTests {
             NSPasteboard.PasteboardType.string.rawValue),
                "plain text still counts as droppable shelf content")
         suite.expect(!ShelfPasteboardSupport.isDroppablePasteboardType(
-            "com.vorssaint.tests.not-a-real-pasteboard-type"),
+            "com.vorkraft.tests.not-a-real-pasteboard-type"),
                "unrelated pasteboard types do not activate the shelf")
         ShelfFilePromiseTests.run(suite)
         ShelfDropRoutingTests.run(suite)
@@ -364,7 +364,7 @@ enum ShelfFeatureTests {
 
         // MARK: Shelf dock placement
 
-        let placementDomain = "com.vorssaint.tests.shelf-dock-placement"
+        let placementDomain = "com.vorkraft.tests.shelf-dock-placement"
         let placementDefaults = UserDefaults(suiteName: placementDomain)!
         placementDefaults.removePersistentDomain(forName: placementDomain)
         defer { placementDefaults.removePersistentDomain(forName: placementDomain) }
@@ -451,7 +451,7 @@ enum ShelfFeatureTests {
         suite.expect(ShelfDockDragSupport.hasDwelled(since: 100.0, now: 100.16, required: 0.15),
                "sustained hover over 150ms counts as dwelled")
         let shelfServiceSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Shelf/ShelfService.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Shelf/ShelfService.swift",
             encoding: .utf8)) ?? ""
         let dockedWatchdog = shelfServiceSource
             .components(separatedBy: "private func startDockedWatchdog()")
@@ -466,10 +466,10 @@ enum ShelfFeatureTests {
             .components(separatedBy: "func hide()")
             .dropFirst().first?.components(separatedBy: "\n    func close").first ?? ""
         let shelfViewSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/Shelf/ShelfView.swift",
+            contentsOfFile: "Sources/Vorkraft/UI/Shelf/ShelfView.swift",
             encoding: .utf8)) ?? ""
         let dockedShelfViewSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/Shelf/ShelfDropZoneView.swift",
+            contentsOfFile: "Sources/Vorkraft/UI/Shelf/ShelfDropZoneView.swift",
             encoding: .utf8)) ?? ""
         suite.expect(explicitShelfClose.contains("DefaultsKey.shelfClearOnClose")
                 && explicitShelfClose.contains("clear()")
@@ -826,7 +826,7 @@ enum ShelfFeatureTests {
         // `.partial` store's dropped entries still own files in that
         // directory, and the blob it kept still points at them.
         let restoreItemsBody = ((try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Shelf/ShelfService.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Shelf/ShelfService.swift",
             encoding: .utf8)) ?? "")
             .components(separatedBy: "private func restoreItems()")
             .dropFirst().first?
@@ -847,7 +847,7 @@ enum ShelfFeatureTests {
         suite.expect(overlay.accessibilityRole() == .window && overlay.isAccessibilityElement(),
                "a floating overlay stays an accessible window for assistive technology")
         let tooltipSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/UI/Shelf/ShelfTooltipPopover.swift", encoding: .utf8)) ?? ""
+            contentsOfFile: "Sources/Vorkraft/UI/Shelf/ShelfTooltipPopover.swift", encoding: .utf8)) ?? ""
         suite.expect(shelfServiceSource.contains("class KeyableShelfPanel: OverlayPanel")
                 && !shelfServiceSource.contains("NSPanel(contentRect")
                 && tooltipSource.contains("OverlayPanel(contentRect") && !tooltipSource.contains("NSPanel(contentRect"),

@@ -127,7 +127,7 @@ enum NotchNotificationTests {
         inbox = NotchNotificationInbox()
         suite.expect(inbox.items.isEmpty, "locking or disabling discards mirrored messages")
 
-        let domain = "com.vorssaint.tests.notch-notifications"
+        let domain = "com.vorkraft.tests.notch-notifications"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

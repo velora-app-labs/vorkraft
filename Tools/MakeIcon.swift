@@ -1,15 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
 
-// Generates all icon assets:
-// - the app iconset and .icns from the exported Default rendition of the
-//   adaptive source (Resources/Brand/AppIcon-Default.png)
-// - the menu bar template glyph and BrandMark from the wordmark master
-//   (Resources/Brand/logo.png)
-// AppIcon-Default.png is a hand-exported twin of Resources/Brand/AppIcon.icon;
-// re-export it whenever the Icon Composer project changes. The build cannot read
-// .icon bundles directly: actool exists only inside full Xcode 26, and the
-// supported local floor is Command Line Tools alone.
+// Generates the original Vorkraft angular V mark and macOS icon assets.
 import AppKit
 
 // Current macOS misreads PNG payloads in the legacy small chunks. It downsamples
@@ -25,20 +17,44 @@ let iconSizes: [(name: String, px: Int, icnsType: String?)] = [
 let outDir = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "AppIcon.iconset"
 let scriptDir = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
 let projectDir = scriptDir.deletingLastPathComponent()
-let logoPath = projectDir.appendingPathComponent("Resources/Brand/logo.png").path
-
-guard let logo = NSImage(contentsOfFile: logoPath),
-      let logoTIFF = logo.tiffRepresentation,
-      let logoRep = NSBitmapImageRep(data: logoTIFF)
-else {
-    print("could not load \(logoPath)")
-    exit(1)
+// A geometric V with a short forge-spark accent; no upstream artwork is used.
+func drawVorkraftMark(in rect: CGRect, color: NSColor) {
+    NSGraphicsContext.saveGraphicsState()
+    let transform = NSAffineTransform()
+    transform.translateX(by: rect.minX, yBy: rect.minY)
+    transform.scaleX(by: rect.width / 100, yBy: rect.height / 100)
+    transform.concat()
+    color.setFill()
+    let v = NSBezierPath()
+    v.move(to: NSPoint(x: 4, y: 88))
+    v.line(to: NSPoint(x: 27, y: 88))
+    v.line(to: NSPoint(x: 50, y: 30))
+    v.line(to: NSPoint(x: 74, y: 88))
+    v.line(to: NSPoint(x: 97, y: 88))
+    v.line(to: NSPoint(x: 61, y: 6))
+    v.line(to: NSPoint(x: 39, y: 6))
+    v.close()
+    v.fill()
+    let spark = NSBezierPath(rect: NSRect(x: 44, y: 78, width: 12, height: 17))
+    spark.fill()
+    NSGraphicsContext.restoreGraphicsState()
 }
 
-let appIconPath = projectDir.appendingPathComponent("Resources/Brand/AppIcon-Default.png").path
-guard let appIconMaster = NSImage(contentsOfFile: appIconPath) else {
-    print("could not load \(appIconPath)")
-    exit(1)
+let logo = NSImage(size: NSSize(width: 1024, height: 1024), flipped: false) { rect in
+    drawVorkraftMark(in: rect, color: .black)
+    return true
+}
+guard let logoTIFF = logo.tiffRepresentation,
+      let logoRep = NSBitmapImageRep(data: logoTIFF) else { exit(1) }
+let appIconMaster = NSImage(size: NSSize(width: 1024, height: 1024), flipped: false) { _ in
+    let shape = NSBezierPath(roundedRect: NSRect(x: 64, y: 64, width: 896, height: 896),
+                             xRadius: 200, yRadius: 200)
+    NSGradient(colors: [NSColor(calibratedRed: 0.06, green: 0.14, blue: 0.25, alpha: 1),
+                        NSColor(calibratedRed: 0.02, green: 0.40, blue: 0.46, alpha: 1)])!
+        .draw(in: shape, angle: 45)
+    drawVorkraftMark(in: NSRect(x: 240, y: 220, width: 544, height: 584),
+                    color: NSColor(calibratedRed: 0.55, green: 1, blue: 0.83, alpha: 1))
+    return true
 }
 
 /// Bounding box of visible (non-transparent) pixels, so the mark can be
@@ -114,17 +130,12 @@ func renderAppIcon(px: Int) -> Data? {
 
 // MARK: - Menu bar glyph (template)
 
-// The mark is ~1.97:1, so fitting it into a fixed box made the width the
-// limiting side and left the height unused, rendering it far shorter than the
-// menu bar icons around it. Size from the height and let the width follow.
-let menuBarGlyphHeight: CGFloat = 12.5
-// Centered geometrically the mark reads high, since the thin ring tails carry
-// the bounding box below the planet body. Drop it onto the same visual floor
-// as its neighbours.
-let menuBarGlyphDrop: CGFloat = 1
-// Taller than the mark needs: the same canvas holds the compact Keep Awake
-// symbols. Keep in sync with BlackHoleGlyph.pointSize in
-// Sources/Vorssaint/App/StatusItemController.swift; `--selftest` enforces it.
+// The compact V needs similar ink height to adjacent menu-bar symbols.
+// Center its trimmed bounds without the old wide upstream mark's downward
+// optical adjustment; that offset made the V sit below neighboring icons.
+let menuBarGlyphHeight: CGFloat = 14
+let menuBarGlyphDrop: CGFloat = 0
+
 let menuBarCanvas = (width: 26, height: 20)
 
 func renderMenuBarIcon(scale: Int) -> Data? {

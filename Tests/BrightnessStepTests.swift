@@ -20,7 +20,7 @@ enum BrightnessStepTests {
     }
 
     class Fixture {
-        static let log = Logger(subsystem: "vorssaint.tests", category: "brightness-step")
+        static let log = Logger(subsystem: "vorkraft.tests", category: "brightness-step")
         static let levelTrustWindow: TimeInterval = 3
         let stateLock = NSLock()
         let workQueue = Queue()

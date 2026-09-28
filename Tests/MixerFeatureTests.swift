@@ -486,7 +486,7 @@ enum MixerFeatureTests {
         // pool, which is issue #971's exhaustion. Read as source text because
         // the engine lives in a file the test target does not compile.
         let mixerCode = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/Audio/AppVolumeMixer.swift",
+            contentsOfFile: "Sources/Vorkraft/Services/Audio/AppVolumeMixer.swift",
             encoding: .utf8)) ?? ""
         let teardownQueueSetup = mixerCode.range(of: "let teardownQueue").flatMap { start in
             mixerCode.range(of: "}()", range: start.upperBound..<mixerCode.endIndex)

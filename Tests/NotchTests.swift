@@ -8,7 +8,7 @@ import SwiftUI
 
 enum NotchTests {
     private static func railContracts(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.notch-fan-only"
+        let domain = "com.vorkraft.tests.notch-fan-only"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
@@ -566,7 +566,7 @@ enum NotchTests {
         NotchKeyboardLightTests.run(suite)
         NotchActivityTests.run(suite)
         NotchMusicExtrasTests.run(suite)
-        let domain = "com.vorssaint.tests.notch"
+        let domain = "com.vorkraft.tests.notch"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
@@ -579,7 +579,7 @@ enum NotchTests {
             defaults.set(value, forKey: key)
         }
         for (key, value) in AppFeature.availabilityDefaults { defaults.set(value, forKey: key) }
-        let firstInstall = "com.vorssaint.tests.notch-new-\(UUID().uuidString)"
+        let firstInstall = "com.vorkraft.tests.notch-new-\(UUID().uuidString)"
         let fresh = UserDefaults(suiteName: firstInstall)!
         defer { fresh.removePersistentDomain(forName: firstInstall) }
         fresh.set(NotchControlItem.defaultHidden, forKey: DefaultsKey.notchHiddenControls)
@@ -610,7 +610,7 @@ enum NotchTests {
         suite.expect(firstDefaults[DefaultsKey.notchIncludeOtherPlayers] as? Bool == false,
                      "new island setups follow music apps only unless broader playback is enabled")
 
-        let priorInstall = "com.vorssaint.tests.notch-existing-\(UUID().uuidString)"
+        let priorInstall = "com.vorkraft.tests.notch-existing-\(UUID().uuidString)"
         let existing = UserDefaults(suiteName: priorInstall)!
         defer { existing.removePersistentDomain(forName: priorInstall) }
         existing.set(true, forKey: DefaultsKey.notchEnabled)
@@ -642,7 +642,7 @@ enum NotchTests {
         suite.expect(!existing.bool(forKey: DefaultsKey.notchAppPanel),
                      "the one-time migration does not run again after a later preference change")
 
-        let priorChoice = "com.vorssaint.tests.notch-choice-\(UUID().uuidString)"
+        let priorChoice = "com.vorkraft.tests.notch-choice-\(UUID().uuidString)"
         let configured = UserDefaults(suiteName: priorChoice)!
         defer { configured.removePersistentDomain(forName: priorChoice) }
         configured.set(true, forKey: DefaultsKey.notchReturnHome)
@@ -1796,7 +1796,7 @@ enum NotchTests {
                "invalid internal positions cannot be serialized into adapter input")
     }
     private static func calendarContracts(_ suite: TestSuite) {
-        let entitlements = NSDictionary(contentsOfFile: "Resources/Vorssaint.entitlements") as? [String: Any]
+        let entitlements = NSDictionary(contentsOfFile: "Resources/Vorkraft.entitlements") as? [String: Any]
         let info = NSDictionary(contentsOfFile: "Resources/Info.plist") as? [String: Any]
         suite.expect(entitlements?["com.apple.security.personal-information.calendars"] as? Bool == true
                && !(info?["NSCalendarsFullAccessUsageDescription"] as? String ?? "").isEmpty,
@@ -1825,9 +1825,9 @@ enum NotchTests {
                && !NotchSupport.keepsPermissionSurface(requesting: false, resolvedAt: 10, now: 11)
                && !NotchSupport.keepsPermissionSurface(requesting: false, resolvedAt: 10, now: 9),
                "permission resolution protects only the short reactivation interval")
-        let defaults = UserDefaults(suiteName: "com.vorssaint.tests.notch-calendar")!
-        defaults.removePersistentDomain(forName: "com.vorssaint.tests.notch-calendar")
-        defer { defaults.removePersistentDomain(forName: "com.vorssaint.tests.notch-calendar") }
+        let defaults = UserDefaults(suiteName: "com.vorkraft.tests.notch-calendar")!
+        defaults.removePersistentDomain(forName: "com.vorkraft.tests.notch-calendar")
+        defer { defaults.removePersistentDomain(forName: "com.vorkraft.tests.notch-calendar") }
         for (key, value) in Defaults.registeredDefaults where key.hasPrefix("notch") { defaults.set(value, forKey: key) }
         for (key, value) in AppFeature.availabilityDefaults { defaults.set(value, forKey: key) }
         suite.expect(!NotchCalendarSupport.isEnabled(in: defaults), "calendar starts off")

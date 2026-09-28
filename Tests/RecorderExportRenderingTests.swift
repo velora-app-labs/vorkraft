@@ -87,7 +87,7 @@ enum RecorderExportRenderingTests {
                 let output = folder.appendingPathComponent("export-\(hasCuts)-\(scenario.blurEnd)-\(speed).mp4")
                 let failure = await RecorderExporter().export(take: take, document: doc,
                     output: .video, to: output, progress: { _ in })
-                suite.expect(failure == nil, "production export succeeds at \(speed)x with cuts \(hasCuts)")
+                suite.expect(failure == nil, "production export succeeds at \(speed)x with cuts \(hasCuts): \(String(describing: failure))")
                 guard failure == nil else { continue }
                 let asset = AVURLAsset(url: output)
                 let duration = try await asset.load(.duration).seconds
@@ -158,7 +158,7 @@ enum RecorderExportRenderingTests {
             doc.cuts = [.init(start: 0.2, end: 0.25)]
             let output = folder.appendingPathComponent("audio-\(speed).mp4")
             let failure = await RecorderExporter().export(take: audioTake, document: doc, output: .video, to: output, progress: { _ in })
-            suite.expect(failure == nil, "audio export succeeds at \(speed)x")
+            suite.expect(failure == nil, "audio export succeeds at \(speed)x: \(String(describing: failure))")
             guard failure == nil else { continue }
             let samples = try await readAudio(output)
             func window(_ start: Double, _ end: Double) -> [Float] {

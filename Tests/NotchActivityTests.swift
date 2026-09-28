@@ -22,7 +22,7 @@ enum NotchActivityTests {
     }
 
     private static func alertContracts(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.timer-alert"
+        let domain = "com.vorkraft.tests.timer-alert"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
@@ -258,7 +258,7 @@ enum NotchActivityTests {
         suite.expect(bounded.focusMinutes == 180 && bounded.shortBreakMinutes == 1 && bounded.longBreakMinutes == 60
                && bounded.longBreakInterval == 1 && bounded.totalSessions == 24,
                "restored out-of-range values cannot overflow deadlines or create invalid cycle intervals")
-        let domain = "com.vorssaint.tests.pomodoro"
+        let domain = "com.vorkraft.tests.pomodoro"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
@@ -394,7 +394,7 @@ enum NotchActivityTests {
                && NotchTimerSupport.compactText(for: hours, at: 3601, locale: locale) == "59m",
                "compact countdowns still switch from hours to minutes at the hour boundary")
 
-        let domain = "com.vorssaint.tests.timer-mode"
+        let domain = "com.vorkraft.tests.timer-mode"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
@@ -758,7 +758,7 @@ enum NotchActivityTests {
     }
 
     private static func gateContracts(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.notch-activities"
+        let domain = "com.vorkraft.tests.notch-activities"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

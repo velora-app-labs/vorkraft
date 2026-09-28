@@ -913,7 +913,7 @@ enum NotchAgentTests {
     // MARK: Preferences and layout
 
     private static func preferences(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.notch-agents"
+        let domain = "com.vorkraft.tests.notch-agents"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

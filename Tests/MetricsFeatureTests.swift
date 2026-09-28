@@ -430,6 +430,24 @@ enum MetricsFeatureTests {
 
         // MARK: Temperature sensor selection
 
+        let intel = TemperatureSensorSelector.platform(brandString: "Intel(R) Core(TM) i9-9880H")
+        suite.expect(intel == .intel, "Intel processors select Intel sensor mappings")
+        suite.expect(TemperatureSensorSelector.isCPUCoreKey("TC1C", platform: intel)
+                     && TemperatureSensorSelector.isCPUCoreKey("TCXC", platform: intel),
+                     "Intel core and package readings are preferred CPU temperatures")
+        suite.expect(!TemperatureSensorSelector.isCPUTemperatureKey("TCGC", platform: intel)
+                     && !TemperatureSensorSelector.isCPUTemperatureKey("Tp0P", platform: intel),
+                     "Intel graphics and powerboard readings cannot become CPU temperatures")
+        suite.expect(TemperatureSensorSelector.isGPUTemperatureKey("TCGC", platform: intel)
+                     && TemperatureSensorSelector.isGPUTemperatureKey("TG0P", platform: intel)
+                     && !TemperatureSensorSelector.isGPUTemperatureKey("TC1C", platform: intel),
+                     "Intel integrated and discrete GPU sensors remain separate from CPU cores")
+        suite.expectClose(TemperatureSensorSelector.displayedCPUTemperature(
+            readings: [("TC1C", 71), ("TCXC", 74), ("TC0P", 85)], platform: intel) ?? 0,
+            74, "Intel display prefers core/package temperature over proximity")
+        suite.expect(!TemperatureSensorSelector.isCPUCoreKey("TC0P", platform: intel),
+                     "Intel proximity sensor cannot drive a core-based fan curve")
+
         suite.expect(TemperatureSensorSelector.platform(brandString: "Apple M1") == .appleM1Family,
                "Apple M1 uses the mapped CPU core sensor set")
         suite.expect(TemperatureSensorSelector.platform(brandString: "Apple M2 Pro") == .appleM2Family,
@@ -696,7 +714,7 @@ enum MetricsFeatureTests {
                                        compressorPages: 0, tagStoragePages: 0) == 16,
                "memory used clamps impossible used memory")
 
-        var vmStats = vorssaint_vm_statistics64_rev3_t()
+        var vmStats = vorkraft_vm_statistics64_rev3_t()
         vmStats.wire_count = 2
         vmStats.purgeable_count = 3
         vmStats.compressor_page_count = 4

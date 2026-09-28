@@ -35,6 +35,7 @@ final class TestSuite {
         let elapsed = ProcessInfo.processInfo.systemUptime - started
         let status = failures.count == previousFailures ? "OK" : "FAILED"
         print("\(name): \(status) (\(checks - before) checks, \(String(format: "%.2f", elapsed))s)")
+        fflush(stdout)
     }
 
     func finish() -> Never {

@@ -1,0 +1,34 @@
+name: Intel Mac build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: intel-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  intel:
+    runs-on: macos-15-intel
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Verify host and port contracts
+        run: |
+          test "$(uname -m)" = x86_64
+          python3 Tools/verify-port.py
+          python3 Tests/test_upstream_sync.py
+      - name: Build Intel app
+        run: ./build.sh
+      - name: Validate binaries and signature
+        run: python3 Tools/verify-port.py --bundle build/stage/Vorkraft.app
+      - name: Self-tests
+        run: ./build/Vorkraft --selftest
+      - name: Unit tests
+        run: ./build.sh --test
+      - name: Package Intel disk image
+        run: ./Tools/make-dmg.sh

@@ -90,7 +90,7 @@ enum NotchDownloadProgressTests {
     }
 
     private static func progressAndCompletion(folder: URL, suite: TestSuite) throws {
-        let queue = DispatchQueue(label: "com.vorssaint.tests.download-progress")
+        let queue = DispatchQueue(label: "com.vorkraft.tests.download-progress")
         let results = Results()
         let observer = NotchDownloadProgressObserver(folder: folder, queue: queue, changed: results.receive)
         defer { observer.stop(); queue.sync {} }
@@ -148,7 +148,7 @@ enum NotchDownloadProgressTests {
     }
 
     private static func cancellation(folder: URL, suite: TestSuite) {
-        let queue = DispatchQueue(label: "com.vorssaint.tests.download-cancel")
+        let queue = DispatchQueue(label: "com.vorkraft.tests.download-cancel")
         let results = Results()
         let observer = NotchDownloadProgressObserver(folder: folder, queue: queue, changed: results.receive)
         let progress = Progress(totalUnitCount: 10)
@@ -168,7 +168,7 @@ enum NotchDownloadProgressTests {
     }
 
     private static func capacity(folder: URL, suite: TestSuite) {
-        let queue = DispatchQueue(label: "com.vorssaint.tests.download-capacity")
+        let queue = DispatchQueue(label: "com.vorkraft.tests.download-capacity")
         let results = Results()
         let observer = NotchDownloadProgressObserver(folder: folder, queue: queue, changed: results.receive)
         defer { observer.stop(); queue.sync {} }
