@@ -17,6 +17,7 @@ enum AppInfo {
     """
     static let websiteURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
     static let repositoryURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
+    static let releasesURL = repositoryURL.appendingPathComponent("releases/latest")
     static let coffeeURL = URL(string: "https://buymeacoffee.com/vorssaint")!
     static let discordURL = URL(string: "https://github.com/velora-app-labs/vorkraft/issues")!
     static let socialURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
