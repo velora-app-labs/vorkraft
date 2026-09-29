@@ -15,11 +15,11 @@ enum AppInfo {
     Modifications © 2026 Vorkraft contributors
     Licensed under GPL-3.0-or-later. Not an official Vorssaint release.
     """
-    static let websiteURL = URL(string: "https://github.com/velora-app-labs/Vorkraft")!
-    static let repositoryURL = URL(string: "https://github.com/velora-app-labs/Vorkraft")!
+    static let websiteURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
+    static let repositoryURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
     static let coffeeURL = URL(string: "https://buymeacoffee.com/vorssaint")!
-    static let discordURL = URL(string: "https://github.com/velora-app-labs/Vorkraft/issues")!
-    static let socialURL = URL(string: "https://github.com/velora-app-labs/Vorkraft")!
+    static let discordURL = URL(string: "https://github.com/velora-app-labs/vorkraft/issues")!
+    static let socialURL = URL(string: "https://github.com/velora-app-labs/vorkraft")!
 
     /// The bundle version. The fallback only applies to the bare binary
     /// (e.g. `--selftest`), never the shipped app, which reads its Info.plist.

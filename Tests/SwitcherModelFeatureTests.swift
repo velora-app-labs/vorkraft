@@ -1749,7 +1749,7 @@ enum SwitcherModelFeatureTests {
                && !SupportUpdateIntroInfo.shouldShow(appVersion: "3.4.0-beta.7", lastSeenVersion: nil)
                && !SupportUpdateIntroInfo.shouldShow(appVersion: "3.5.0", lastSeenVersion: nil),
                "support prompt never leaks into another release series")
-        suite.expect(AppInfo.discordURL.absoluteString == "https://github.com/velora-app-labs/Vorkraft/issues",
+        suite.expect(AppInfo.discordURL.absoluteString == "https://github.com/velora-app-labs/vorkraft/issues",
                "the community action opens Vorkraft issues")
         suite.expect(AppInfo.coffeeURL.absoluteString == "https://buymeacoffee.com/vorssaint",
                "the support action opens the original developer donation page")

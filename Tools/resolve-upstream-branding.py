@@ -12,7 +12,7 @@ def rebrand(text):
     result = []
     for line in text.splitlines(keepends=True):
         if 'Copyright' not in line and '© 2026 Vorssaint' not in line:
-            line = (line.replace('vorssaint/vorssaint-utils', 'velora-app-labs/Vorkraft')
+            line = (line.replace('vorssaint/vorssaint-utils', 'velora-app-labs/vorkraft')
                     .replace('com.vorssaint.utils', 'com.veloraapplabs.vorkraft')
                     .replace('VORSSAINT', 'VORKRAFT').replace('Vorssaint', 'Vorkraft')
                     .replace('vorssaint', 'vorkraft'))

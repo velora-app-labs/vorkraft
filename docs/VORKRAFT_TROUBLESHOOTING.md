@@ -28,4 +28,4 @@ Run `./Tools/sync-upstream.sh --install` from a clean checkout. See [the sync gu
 
 ## Hosted features
 
-This private fork does not have the upstream project's sharing/feedback server or notarized automatic-update channel. Save captures and recordings locally and use the [Vorkraft issue tracker](https://github.com/velora-app-labs/Vorkraft/issues) for support.
+This private fork does not have the upstream project's sharing/feedback server or notarized automatic-update channel. Save captures and recordings locally and use the [Vorkraft issue tracker](https://github.com/velora-app-labs/vorkraft/issues) for support.
