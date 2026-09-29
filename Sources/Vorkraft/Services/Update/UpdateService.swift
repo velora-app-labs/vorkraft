@@ -102,7 +102,7 @@ final class UpdateService: ObservableObject {
 
     func check(manual: Bool) {
         guard AppInfo.automaticUpdatesAvailable else {
-            if manual { state = .failed("Vorkraft updates are distributed through the private GitHub repository.") }
+            if manual { NSWorkspace.shared.open(AppInfo.releasesURL) }
             return
         }
         if AppInfo.isDeveloperBuild {

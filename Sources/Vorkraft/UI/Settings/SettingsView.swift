@@ -581,39 +581,45 @@ struct UpdatesView: View {
 
     var body: some View {
         Section(l10n.s.updatesSection) {
-            Toggle(l10n.s.autoCheckToggle, isOn: $autoCheck)
-                .onChange(of: autoCheck) { _, value in
-                    UpdateService.shared.autoCheckEnabled = value
-                }
-
-            VStack(alignment: .leading, spacing: 4) {
-                Toggle(l10n.s.includeBetaUpdatesToggle, isOn: $includeBetas)
-                    .onChange(of: includeBetas) { _, value in
-                        UpdateService.shared.includeBetaUpdates = value
+            if AppInfo.automaticUpdatesAvailable {
+                Toggle(l10n.s.autoCheckToggle, isOn: $autoCheck)
+                    .onChange(of: autoCheck) { _, value in
+                        UpdateService.shared.autoCheckEnabled = value
                     }
-                SettingsCaptionText(l10n.s.includeBetaUpdatesCaption)
-            }
 
-            statusRow
-
-            HStack {
-                Button(l10n.s.checkNowButton) {
-                    updates.check(manual: true)
+                VStack(alignment: .leading, spacing: 4) {
+                    Toggle(l10n.s.includeBetaUpdatesToggle, isOn: $includeBetas)
+                        .onChange(of: includeBetas) { _, value in
+                            UpdateService.shared.includeBetaUpdates = value
+                        }
+                    SettingsCaptionText(l10n.s.includeBetaUpdatesCaption)
                 }
-                .disabled(isBusy)
 
-                if case .available = updates.state {
-                    Button(l10n.s.updateInstallButton) {
-                        appDelegate()?.showUpdatePreview()
+                statusRow
+
+                HStack {
+                    Button(l10n.s.checkNowButton) {
+                        updates.check(manual: true)
                     }
-                    .buttonStyle(.borderedProminent)
-                }
-            }
+                    .disabled(isBusy)
 
-            if let lastChecked = updates.lastChecked {
-                Text("\(l10n.s.updateLastChecked) \(Self.format(lastChecked))")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
+                    if case .available = updates.state {
+                        Button(l10n.s.updateInstallButton) {
+                            appDelegate()?.showUpdatePreview()
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+
+                if let lastChecked = updates.lastChecked {
+                    Text("\(l10n.s.updateLastChecked) \(Self.format(lastChecked))")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+            } else {
+                Text("Updates are available on GitHub Releases. Download the latest installer and replace Vorkraft in Applications. Automatic installation is not enabled.")
+                    .foregroundStyle(.secondary)
+                Link("View latest release", destination: AppInfo.releasesURL)
             }
         }
     }
