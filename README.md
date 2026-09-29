@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/vorkraft-icon.png" alt="Vorkraft app icon" width="128" height="128">
+</p>
+
 # Vorkraft
 
 Vorkraft is an in-development port of [Vorssaint](https://github.com/vorssaint/vorssaint-utils) for Intel-based Macs (`x86_64`).
