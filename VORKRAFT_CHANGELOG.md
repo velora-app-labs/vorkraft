@@ -1,5 +1,11 @@
 # Vorkraft changelog
 
+## [0.1.1] - 2026-09-28
+
+### Fixed
+- Fill the complete menu popover using native material on macOS Sonoma and Sequoia.
+- Clarify original copyright, Vorkraft modifications and independent-fork status in About, Support and app metadata.
+
 ## [0.1.0] - 2026-09-28
 
 ### Added
