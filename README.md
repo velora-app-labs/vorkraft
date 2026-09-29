@@ -2,9 +2,11 @@
   <img src="docs/assets/vorkraft-icon.png" alt="Vorkraft app icon" width="128" height="128">
 </p>
 
-# Vorkraft
+# Vorkraft — an independent Vorssaint fork for Intel Macs
 
-Vorkraft is an in-development port of [Vorssaint](https://github.com/vorssaint/vorssaint-utils) for Intel-based Macs (`x86_64`).
+Vorkraft brings the [Vorssaint](https://github.com/vorssaint/vorssaint-utils) menu bar toolkit to Intel-based Macs (`x86_64`) running macOS 14 Sonoma or later, including macOS 15 Sequoia. This independent, in-development fork includes system monitoring, window tools, clipboard history, screen recording and other native Mac utilities.
+
+[Download the latest Intel Mac installer](https://github.com/velora-app-labs/vorkraft/releases/latest). Builds are locally signed, not Apple-notarized; see the release notes for installation instructions.
 
 ## Support the original developer
 
